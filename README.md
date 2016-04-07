@@ -31,6 +31,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `create_project.rb` - Create a project with a name passed as argument and return the assigned ID.
 * `find_xss.rb` - Find recent projects with XSS Issues in them.
 * `load_project_from_api` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance.
+* `project_stats.rb` - Find which issues have been found across multiple projects and other project stats.
 
 
 # What does each script do?
