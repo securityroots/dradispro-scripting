@@ -26,6 +26,10 @@ $ cd /opt/dradispro/dradispro/current/
 $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 ```
 
+# List of scripts
+
+* `create_project.rb` - Create a project with a name passed as argument and return the assigned ID.
+* `find_xss.rb` - Find recent projects with XSS Issues in them.
 
 
 # What does each script do?

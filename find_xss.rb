@@ -1,4 +1,4 @@
-# create_project.rb - Create a new Project and returns the assign ID.
+# find_xss.rb - Find projects with XSS Issues in them.
 #
 # Copyright (C) 2016 Security Roots Ltd.
 #
@@ -19,18 +19,32 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
-if ARGV.size != 1
-  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <project name>"
-  exit 1
+def with_scope(project, &block)
+  Node.set_project_scope(project.id)
+  Note.set_project_scope(project.id)
+  Issue.set_project_scope(project.id)
+  Evidence.set_project_scope(project.id)
+  Tag.set_project_scope(project.id)
+  yield
 end
 
-project = Project.new name: ARGV[0]
+puts; puts; puts
 
-if project.save
-  project = Project.last
-  puts project.id
-  exit 0
-else
-  puts project.errors.full_messages.join("\n")
-  exit 2
+days_ago = if ARGV.size == 1
+             ARGV[0].to_i
+           else
+             5
+           end.days.ago
+
+recent_projects  = Project.where('projects.updated_at >= ?', days_ago)
+recent_projects.each do |project|
+  with_scope(project) do
+    issue_library = Node.issue_library
+    Issue.where(node_id: issue_library.id).each do |issue|
+      if issue.title =~ /XSS/i
+        puts "* Project #{project.name} has '#{issue.title}'"
+        break
+      end
+    end
+  end
 end
