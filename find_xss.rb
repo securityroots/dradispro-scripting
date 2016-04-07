@@ -28,6 +28,11 @@ def with_scope(project, &block)
   yield
 end
 
+if ARGV.size != 1
+  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <days ago>"
+  exit 1
+end
+
 puts; puts; puts
 
 days_ago = if ARGV.size == 1
