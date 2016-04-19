@@ -59,7 +59,7 @@ recent_projects.each do |project|
     issue_library = Node.issue_library
     project_data[project.id][:issues] = []
 
-    Issue.where(node_id: issue_library.id).find(:all, include: [:evidence, :tags]).each do |issue|
+    Issue.where(node_id: issue_library.id).includes(:evidence, :tags).each do |issue|
 
       affected_list = issue.affected.map(&:label).uniq
 
