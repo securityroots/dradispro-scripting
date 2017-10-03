@@ -33,12 +33,22 @@ Issue.set_project_scope(project.id)
 Evidence.set_project_scope(project.id)
 Tag.set_project_scope(project.id)
 
-#Node.where(type_id: 1).each do |n|
 ContentBlock.where(project_id: project.id).each do |block|
-    puts "#{block.content}"
-    block.content << "Updated!"
-    block.set_field('Title', "Bar")
-    block.block_group = "Foo"
-    block.save
-    puts "#{block.block_group}"
+  # return the text of the Content Block
+  puts "#{block.content}"
+
+  # add "Updated" to the end of the text in the Content Block
+  block.content << "Updated!"
+
+  # change the #[Title]# field value to "Bar"
+  block.set_field('Title', "Bar")
+
+  # change the Block Group
+  block.block_group = "Foo"
+
+  # save changes to Content Block
+  block.save
+
+  # return the block group
+  puts "#{block.block_group}"
 end

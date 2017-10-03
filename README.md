@@ -37,7 +37,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `project_stats.rb` - Find which issues have been found across multiple projects and other project stats.
 * `update_content_blocks.rb` - Return and edit Content Blocks associated with a specific project
 * `update_issuelib_entries.rb` - Update your IssueLibrary entries with a quick script. This example adds new fields to all IssueLibrary 
-* entries and replaces a specific field if found. 
+entries and replaces a specific field if found. 
 
 # What does each script do?
 
