@@ -1,4 +1,4 @@
-# update_entries.rb - Exports all your IssueLibrary entries to a single file.
+# export_issuelib.rb - Exports all your IssueLibrary entries to a single file.
 #
 # Copyright (C) 2017 Security Roots Ltd.
 #
@@ -19,17 +19,15 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 #
-# USAGE: scp the file to /tmp/, then run the following as dradispro:
-# $ cd /tmp/
-# $ RAILS_ENV=production bundle exec rails runner /tmp/export_issuelib.rb >> issuelib_dump.rb
+# USAGE: scp the file to /opt/dradispro/dradispro/current/, then run the following as dradispro:
+# $ cd /opt/dradispro/dradispro/current/
+# $ RAILS_ENV=production bundle exec rails runner /opt/dradispro/dradispro/current/export_issuelib.rb >> issuelib_dump.rb
 # 
-# This will create /tmp/issuelib_dump.rb, edit that as needed! 
+# This will create /opt/dradispro/dradispro/current/issuelib_dump.rb, edit that as needed! 
 # 
 # Then, you can upload the issuelib_dump.rb file to your instance by running: 
-# $ RAILS_ENV=production bundle exec rails runner /tmp/issuelib_dump.rb
+# $ RAILS_ENV=production bundle exec rails runner /opt/dradispro/dradispro/current/issuelib_dump.rb
 
 Dradis::Pro::Issuelib::Entry.find do |libentry|
-	line_breaks = libentry.content.dup
-	line_breaks.gsub
 	puts %{Dradis::Pro::Issuelib::Entry.create content: "#{libentry.content}"}
 end
