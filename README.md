@@ -28,16 +28,18 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 
 # List of scripts
 
-* `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project.
-* `create_project.rb` - Create a project with a name passed as argument and return the assigned ID.
-* `daily_summary.rb` - Finds and outputs all of the Issues added to Dradis in the past 24 hours.
+* `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project
+* `create_project.rb` - Create a project with a name passed as argument and return the assigned ID
+* `daily_summary.rb` - Finds and outputs all of the Issues added to Dradis in the past 24 hours
 * `delete_nodes_without_evidence.rb` - Deletes Host Nodes that don't have any Evidence associated with them in a specific project
-* `find_xss.rb` - Find recent projects with XSS Issues in them.
-* `load_project_from_api` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance.
-* `project_stats.rb` - Find which issues have been found across multiple projects and other project stats.
+* `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
+* `find_xss.rb` - Find recent projects with XSS Issues in them
+* `load_project_from_api` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance
+* `project_association_check.rb` - Checks to make sure all projects are associated with a report template
+* `project_stats.rb` - Find which issues have been found across multiple projects and other project stats
+* `recover_trash.rb` - Restores all the items from the Trash feature in a single project
 * `update_content_blocks.rb` - Return and edit Content Blocks associated with a specific project
-* `update_issuelib_entries.rb` - Update your IssueLibrary entries with a quick script. This example adds new fields to all IssueLibrary 
-entries and replaces a specific field if found. 
+* `update_issuelib_entries.rb` - Find/replace and add fields to your IssueLibrary entries
 
 # What does each script do?
 
