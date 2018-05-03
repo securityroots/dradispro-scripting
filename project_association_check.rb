@@ -24,15 +24,23 @@
 # $ RAILS_ENV=production bundle exec rails runner /opt/dradispro/dradispro/current/project_association_check.rb
 
 all_projects = Project.all
+all_templates = ReportTemplateProperties.all
+
+# Create an array with the IDs of all of the existing report templates on the instance
+rtp_array = []
+all_templates.each do |template|
+	rtp_array << template.id
+end
 
 puts "## These projects are no longer associated with a report template! ##"
 puts " "
 
+# Check to see if each project is associated with an existing report template
 all_projects.each do |project|
-
-	if project.report_template_properties_id.nil?
+	rtp = project.report_template_properties_id
+	unless rtp_array.include? rtp
 		puts "#{project.name}"
 		puts "    go to /pro/projects/#{project.id}/edit to resolve"
-		puts " "
+		puts " "		
 	end
 end
