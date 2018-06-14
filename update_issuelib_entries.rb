@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
-Dradis::Pro::Issuelib::Entry.find do |libentry|
+Dradis::Pro::Issuelib::Entry.all.each do |libentry|
   libentry.content << "\r\n\r\n#[Status]#\r\nOpen | Closed\r\n"
   puts "Adding fields to IssueLibrary entry #{libentry.id}"
   libentry.save
