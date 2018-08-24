@@ -28,12 +28,7 @@ end
 pid = ARGV[0]
 project  = Project.find(pid)
 
-Node.set_project_scope(project.id)
-Issue.set_project_scope(project.id)
-Evidence.set_project_scope(project.id)
-Tag.set_project_scope(project.id)
-
-ContentBlock.where(project_id: project.id).each do |block|
+project.content_blocks.each do |block|
   # return the text of the Content Block
   puts "#{block.content}"
 

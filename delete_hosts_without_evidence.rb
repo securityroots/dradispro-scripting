@@ -25,19 +25,10 @@ if ARGV.size != 1
  exit 1
 end
 
-pid = ARGV[0]
-project  = Project.find(pid)
-
-Node.set_project_scope(project.id)
-Issue.set_project_scope(project.id)
-Evidence.set_project_scope(project.id)
-Note.set_project_scope(project.id)
-Tag.set_project_scope(project.id)
-
-Node.where(type_id: 1).each do |n|
-    puts "#{n.label} is a host"
-  if Evidence.where(node_id: n.id).count == 0
-      puts "No Evidence associated with #{n.label}, deleting"
-      n.destroy
+Project.find(ARGV[0]).nodes.where(type_id: Node::Types::HOST).each do |n|
+  puts "#{n.label} is a host"
+  if n.evidence.none?
+    puts "No Evidence associated with #{n.label}, deleting"
+    n.destroy
   end
 end
