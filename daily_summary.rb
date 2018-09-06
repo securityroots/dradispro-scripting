@@ -19,12 +19,6 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
-def with_scope(project, &block)
-  Node.set_project_scope(project.id)
-  Issue.set_project_scope(project.id)
-  yield
-end
-
 puts; puts; puts
 
 yest = DateTime.now - (1)
@@ -34,12 +28,9 @@ puts; puts
 
 recent_projects  = Project.where("projects.updated_at >= ? AND projects.updated_at <= ?", yest, DateTime.now)
 recent_projects.each do |project|
-  with_scope(project) do
-    issue_library = Node.issue_library
-    Issue.where(node_id: issue_library.id).where("notes.updated_at >= ? AND notes.updated_at <= ?", yest, DateTime.now).each do |issue|
-    		puts "* Recent Issue: '#{issue.title}'"
-    		puts "  Added to Project: '#{project.name}' on '#{issue.updated_at}' "
-    		puts " "
-    end
+  project.issues.where('notes.updated_at >= ? AND notes.updated_at <= ?', yest, DateTime.now).each do |issue|
+    puts "* Recent Issue: '#{issue.title}'"
+    puts "  Added to Project: '#{project.name}' on '#{issue.updated_at}' "
+    puts " "
   end
 end

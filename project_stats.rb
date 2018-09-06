@@ -19,15 +19,6 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
-def with_scope(project, &block)
-  Node.set_project_scope(project.id)
-  Note.set_project_scope(project.id)
-  Issue.set_project_scope(project.id)
-  Evidence.set_project_scope(project.id)
-  Tag.set_project_scope(project.id)
-  yield
-end
-
 def underline(title, character = '=')
   puts title
   puts character * title.length
@@ -48,32 +39,25 @@ days_ago = if ARGV.size == 1
 
 # 1. Gather the metrics
 
-recent_projects  = Project.where('projects.updated_at >= ?', days_ago)
 project_data     = {}
 issue_data       = {}
 
-recent_projects.each do |project|
+Project.where('projects.updated_at >= ?', days_ago).each do |project|
   project_data[project.id] = { name: project.name }
+  project_data[project.id][:issues] = []
 
-  with_scope(project) do
-    issue_library = Node.issue_library
-    project_data[project.id][:issues] = []
+  project.issues.includes(:evidence, :tags).each do |issue|
+    affected_list = issue.affected.map(&:label).uniq
 
-    Issue.where(node_id: issue_library.id).includes(:evidence, :tags).each do |issue|
+    issue_data[issue.title]           ||= { assets: [], projects: [] }
+    issue_data[issue.title][:assets]   << affected_list
+    issue_data[issue.title][:projects] << project.id
 
-      affected_list = issue.affected.map(&:label).uniq
-
-      issue_data[issue.title]           ||= { assets: [], projects: [] }
-      issue_data[issue.title][:assets]   << affected_list unless
-      issue_data[issue.title][:projects] << project.id
-
-      project_data[project.id][:issues] << {
-        title: issue.title,
-        affected: affected_list,
-        tag: issue.tags.any? ? issue.tags.first.display_name : 'n/a'
-      }
-    end
-
+    project_data[project.id][:issues] << {
+      title: issue.title,
+      affected: affected_list,
+      tag: issue.tags.any? ? issue.tags.first.display_name : 'n/a'
+    }
   end
 end
 

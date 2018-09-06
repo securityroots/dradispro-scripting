@@ -19,15 +19,6 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
-def with_scope(project, &block)
-  Node.set_project_scope(project.id)
-  Note.set_project_scope(project.id)
-  Issue.set_project_scope(project.id)
-  Evidence.set_project_scope(project.id)
-  Tag.set_project_scope(project.id)
-  yield
-end
-
 if ARGV.size != 1
   puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <days ago>"
   exit 1
@@ -35,21 +26,13 @@ end
 
 puts; puts; puts
 
-days_ago = if ARGV.size == 1
-             ARGV[0].to_i
-           else
-             5
-           end.days.ago
+days_ago = (ARGV.size == 1 ?  ARGV[0].to_i : 5).days.ago
 
-recent_projects  = Project.where('projects.updated_at >= ?', days_ago)
-recent_projects.each do |project|
-  with_scope(project) do
-    issue_library = Node.issue_library
-    Issue.where(node_id: issue_library.id).each do |issue|
-      if issue.title =~ /XSS/i
-        puts "* Project #{project.name} has '#{issue.title}'"
-        break
-      end
+Project.where('projects.updated_at >= ?', days_ago).each do |project|
+  project.issues.each do |issue|
+    if issue.title =~ /XSS/i
+      puts "* Project #{project.name} has '#{issue.title}'"
+      break
     end
   end
 end

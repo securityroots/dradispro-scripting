@@ -25,18 +25,9 @@ if ARGV.size != 1
 end
 
 pid = ARGV[0]
-project  = Project.find(pid)
-
-Node.set_project_scope(project.id)
-Issue.set_project_scope(project.id)
-Evidence.set_project_scope(project.id)
-Note.set_project_scope(project.id)
-Tag.set_project_scope(project.id)
-
-fields = Dradis::Pro::BI::CustomField.all
 
 Project.find(pid).custom_field_values.each do |project_property|
 	bi_field_id = project_property.custom_field_id
-	bi_field_name = fields.find(bi_field_id).name
+	bi_field_name = Dradis::Pro::BI::CustomField.find(bi_field_id).name
 	puts "#{bi_field_name}: #{project_property.value}"
 end
