@@ -1,7 +1,7 @@
 # update_attachment_paths.rb - Updates attachment paths so they match the >= 3.0
 #                              format (after one project per tab was introduced)
 #
-# Copyright (C) 2017 Security Roots Ltd.
+# Copyright (C) 2018 Security Roots Ltd.
 #
 # This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
 # The collection can be found at
