@@ -30,8 +30,7 @@ def update_attachment_paths(item, text_attr)
     '!/pro/projects/%d/nodes/%d/attachments/%s!' % [project_id, $1, $2]
   end
 
-  item.send(text_attr + '=', new_text)
-  item.save!
+  item.update_column(text_attr, new_text)
 
   true
 end
