@@ -1,0 +1,47 @@
+<!--# tag_issues.html.erb - Tags Issues based on CVSSv3.BaseScore field
+#
+# Copyright (C) 2019 Security Roots Ltd.
+#
+# This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
+# The collection can be found at
+#   https://github.com/securityroots/dradispro-scripting
+#
+# DPSE free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# DPSE is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with DPSE.  If not, see <http://www.gnu.org/licenses/>.-->
+
+<h2>Updating the tags of all the Issues</h2>
+<ul>
+<% project.issues.each do |issue| %>
+  <% base_cvss = issue.fields["CVSSv3.BaseScore"].to_f %>
+  <% if base_cvss >= 9.0 && base_cvss <= 10.0 %>
+    <% issue.tag_list = "!9467bd_critical" %>
+    <li><p><%= issue.fields["Title"] %> tagged as Critical</p></li>
+  <% elsif base_cvss >= 7.0 && base_cvss <= 8.9 %>
+    <% issue.tag_list = "!d62728_high" %>
+    <li><p><%= issue.fields["Title"] %> tagged as High</p></li>
+  <% elsif base_cvss >= 4.0 && base_cvss <= 6.9 %>
+    <% issue.tag_list = "!ff7f0e_medium" %>
+    <li><p><%= issue.fields["Title"] %> tagged as Medium</p></li>
+  <% elsif base_cvss >= 0.1 && base_cvss <= 3.9 %>
+    <% issue.tag_list = "!6baed6_low" %>
+    <li><p><%= issue.fields["Title"] %> tagged as Low</p></li>
+  <% elsif base_cvss == 0.0 %>
+    <% issue.tag_list = "!2ca02c_info" %>
+    <li><p><%= issue.fields["Title"] %> tagged as Info</p></li>
+  <% end %>
+<% end %>
+</ul>
+
+<h1>All Issue tags updated!</h1>
+<br/>
+<p>Please close this tab</p>
