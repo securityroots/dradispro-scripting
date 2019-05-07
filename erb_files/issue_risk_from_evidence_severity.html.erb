@@ -1,0 +1,84 @@
+<!-- 
+# issue_risk_from_evidence_severity.html.erb - Sets the Issue's #[Risk]# field value and tag based on the highest #[Severity]# field value from the associated Evidence
+#
+# Copyright (C) 2019 Security Roots Ltd.
+#
+# This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
+# The collection can be found at
+#   https://github.com/securityroots/dradispro-scripting
+#
+# DPSE free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# DPSE is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
+
+USAGE: 
+1. Upload this script to Dradis as an HTML template by navigating to Templates > Reports in the header and uploading this script under the HTML tab
+2. Navigate to your project and click Export results. Select this file from the HTML tab and click Export
+3. Review the output in the new tab and confirm that the script has run as expected!
+--> 
+
+<h1>Updating all Issue Risk fields based on the highest Evidence Severity field</h1>
+<h2>Please resolve any issues that appear below</h2>
+<% for issue in issues;
+	%><% if issue.fields['Risk'] == "Mixed" %><%
+		%><% if issue.affected.empty? %><%
+	    %><p class="well">No evidence found for "<%= issue.fields['Title'] %>"</p><%
+	  %><% else %><%
+	  	%><% intC = 0 %><%
+	  	%><% intH = 0 %><%
+	  	%><% intM = 0 %><%
+	  	%><% intL = 0 %><%
+	  	%><% intI = 0 %><%
+	    %><% issue.evidence_by_node.each do |node, instances| %><%
+	    	%><% instances.each_with_index do |evidence, i| %><%
+          %><% if evidence.fields['Severity'] == "Critical" %><%
+		    		%><% intC += 1 %><%
+		    	%><% elsif evidence.fields['Severity'] == "High" %><%
+		    		%><% intH += 1 %><%
+		    	%><% elsif evidence.fields['Severity'] == "Medium" %><%
+		    		%><% intM += 1 %><%
+		    	%><% elsif evidence.fields['Severity'] == "Low" %><%
+		    		%><% intL += 1 %><%
+		    	%><% elsif evidence.fields['Severity'] == "Info" %><%
+		    		%><% intI += 1 %><%
+		    	%><% end %><%
+        %><% end %><%
+	    %><% end %><%
+
+	    %><% if intC > 0 %><%
+	    	%><% issue.set_field('Risk', 'Critical') %><%
+	    	%><% issue.tag_list = "!9467bd_critical" %><%
+	    	%><% issue.save %><%
+	    %><% elsif intH > 0 %><%
+	    	%><% issue.set_field('Risk', 'High') %><%
+	    	%><% issue.tag_list = "!d62728_high" %><%
+	    	%><% issue.save %><%
+	    %><% elsif intM > 0 %><%
+	    	%><% issue.set_field('Risk', 'Medium') %><%
+	    	%><% issue.tag_list = "!ff7f0e_medium" %><%
+	    	%><% issue.save %><%
+	    %><% elsif intL > 0 %><%
+	    	%><% issue.set_field('Risk', 'Low') %><%
+	    	%><% issue.tag_list = "!6baed6_low" %><%
+	    	%><% issue.save %><%
+	    %><% elsif intI > 0 %><%
+	    	%><% issue.set_field('Risk', 'Info') %><%
+	    	%><% issue.tag_list = "!2ca02c_info" %><%
+	    	%><% issue.save %><%
+	    %><% else %><%
+	    	%><p>Dradis can't find an Evidence severity to use for "<%= issue.fields['Title'] %>", please investigate!</p><%
+	    %><% end %><%
+
+	  %><% end %><%
+	%><% end %><%
+end %>
+<h1>Updated all Issue Risk fields based on the highest Evidence Severity field</h1>
