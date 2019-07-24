@@ -29,7 +29,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 # List of scripts
 
 * `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project
-* `bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
+* `/bash_files/bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
 * `create_project.rb` - Create a project with a name passed as argument and return the assigned ID
 * `daily_summary.rb` - Finds and outputs all of the Issues added to Dradis in the past 24 hours
 * `delete_nodes_without_evidence.rb` - Deletes Host Nodes that don't have any Evidence associated with them in a specific project
