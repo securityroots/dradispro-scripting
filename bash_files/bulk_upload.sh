@@ -5,7 +5,7 @@
 #
 # scp this script file to /opt/dradispro/dradispro/current/ on your Dradis instance.
 # $ chmod +x bulk_upload.sh
-# $ ./nmap_bash.sh <project_id> <plugin> <path>
+# $ ./bulk_upload.sh <project_id> <plugin> <path>
 #
 # Copyright (C) 2019 Security Roots Ltd.
 #
@@ -27,7 +27,7 @@
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
 if [ "$1" = "" ] || [ "$2" = "" ] || [ "$3" = "" ]; then
-  echo "Usage: ./nmap_bash.sh <project_id> <plugin> <path>"
+  echo "Usage: ./bulk_upload.sh <project_id> <plugin> <path>"
   echo ""
   echo "<project_id> is the number of your project. E.g. for IP [dradis IP]/pro/projects/4 your <project_id> is 4"
   echo ""
