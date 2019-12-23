@@ -36,16 +36,25 @@ puts "#{project_count} Projects in #{current_year}\n\n"
 @intL = 0
 @intI = 0
 issue_data = {}
+issue_crit = {}
+issue_high = {}
+issue_med = {}
 sorted_data = {}
 
 Project.where("projects.created_at >= ? AND projects.created_at <= ?", year_start, DateTime.now).each do |project|
   project.issues.includes(:evidence, :tags).each do |issue|
     if issue.tag_list == "!9467bd_critical"
       @intC += 1
+      issue_crit[issue.title] ||= { projects: [] }
+      issue_crit[issue.title][:projects] << project.id
     elsif issue.tag_list == "!d62728_high"
       @intH += 1
+      issue_high[issue.title] ||= { projects: [] }
+      issue_high[issue.title][:projects] << project.id
     elsif issue.tag_list == "!ff7f0e_medium"
       @intM += 1
+      issue_med[issue.title] ||= { projects: [] }
+      issue_med[issue.title][:projects] << project.id
     elsif issue.tag_list == "!6baed6_low"
       @intL += 1
     elsif issue.tag_list == "!2ca02c_info"
@@ -66,6 +75,30 @@ puts "Total Info Issues: #{@intI}\n\n"
 # Top 10 most found Issues (by title)
 puts "Top 10 most found Issues (by title)"
 sorted_data = issue_data.sort_by { |issue, data| data[:projects].count }.reverse.first(10)
+
+sorted_data.reject{ |title, data| data[:projects].length == 1 }.each do |title, data|
+  puts "* #{title} (#{data[:projects].count})"
+end
+
+# Top 10 most found Critical Issues (by title)
+puts "\n\nTop 10 most found Critical Issues (by title)"
+sorted_data = issue_crit.sort_by { |issue, data| data[:projects].count }.reverse.first(10)
+
+sorted_data.reject{ |title, data| data[:projects].length == 1 }.each do |title, data|
+  puts "* #{title} (#{data[:projects].count})"
+end
+
+# Top 10 most found High Issues (by title)
+puts "\n\nTop 10 most found High Issues (by title)"
+sorted_data = issue_high.sort_by { |issue, data| data[:projects].count }.reverse.first(10)
+
+sorted_data.reject{ |title, data| data[:projects].length == 1 }.each do |title, data|
+  puts "* #{title} (#{data[:projects].count})"
+end
+
+# Top 10 most found Medium Issues (by title)
+puts "\n\nTop 10 most found Medium Issues (by title)"
+sorted_data = issue_med.sort_by { |issue, data| data[:projects].count }.reverse.first(10)
 
 sorted_data.reject{ |title, data| data[:projects].length == 1 }.each do |title, data|
   puts "* #{title} (#{data[:projects].count})"
