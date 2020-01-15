@@ -35,6 +35,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `delete_nodes_without_evidence.rb` - Deletes Host Nodes that don't have any Evidence associated with them in a specific project
 * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
 * `find_xss.rb` - Find recent projects with XSS Issues in them
+* `issue_id.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
 * `load_project_from_api` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance
 * `project_association_check.rb` - Checks to make sure all projects are associated with a report template
 * `project_stats.rb` - Find which issues have been found across multiple projects and other project stats
