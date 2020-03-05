@@ -19,15 +19,17 @@
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
-if ARGV.size != 1
-  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <project name>"
+if ARGV.size != 2
+  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} \"<project name>\" <owner_id>"
   exit 1
 end
 
 project = Project.new name: ARGV[0]
+user_id = ARGV[1]
 
 if project.save
   project = Project.last
+  project.assign_owner(User.find_by_id(user_id) || User.first)
   puts project.id
   exit 0
 else
