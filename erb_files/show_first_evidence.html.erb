@@ -1,0 +1,39 @@
+<!-- 
+# show_first_evidence.html.erb - Sets the first instances of Evidence for each Issue to Show|Yes
+#
+# Copyright (C) 2020 Security Roots Ltd.
+#
+# This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
+# The collection can be found at
+#   https://github.com/securityroots/dradispro-scripting
+#
+# DPSE free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# DPSE is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
+USAGE: 
+1. Upload this script to Dradis as an HTML template by navigating to Templates > Reports in the header and uploading this script under the HTML tab
+2. Navigate to your project and click Export results. Select this file from the HTML tab and click Export
+3. Review the output in the new tab and confirm that the script has run as expected!
+--> 
+
+<h1>Updating the first instance of Evidence for each Issue to Show|Yes</h1>
+<h2>Please resolve any issues that appear below</h2>
+<% for issue in issues;
+  %><% if issue.affected.empty? %><%
+    %><p><strong>No evidence found for "<%= issue.fields['Title'] %>"</strong></p><%
+  %><% else %><%
+    %><% issue.evidence.first.set_field('Show', 'Yes') %><%
+    %><% issue.evidence.first.save %><%
+    %><p>Updated Evidence for "<%= issue.fields['Title'] %>"</p><%
+      %><% end %><%
+end %>
+<h1>Updated the first instance of Evidence for each Issue to Show|Yes</h1>
