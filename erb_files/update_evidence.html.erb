@@ -1,0 +1,67 @@
+<!-- 
+# update_evidence.html.erb - Updates each instance of Evidence to contain DataSource, Show, Output and Port
+#
+# Copyright (C) 2020 Security Roots Ltd.
+#
+# This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
+# The collection can be found at
+#   https://github.com/securityroots/dradispro-scripting
+#
+# DPSE free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# DPSE is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
+USAGE: 
+1. Upload this script to Dradis as an HTML template by navigating to Templates > Reports in the header and uploading this script under the HTML tab
+2. Navigate to your project and click Export results. Select this file from the HTML tab and click Export
+3. Review the output in the new tab and confirm that the script has run as expected!
+--> 
+
+<h1>Updating the Evidence for each Issue to contain required fields!</h1>
+<% for issue in issues; %><%
+  %><% issues.each do |issue| %><%
+    %><% intM = 0 %><%
+    %><% issue.evidence.each do |evidence| %><%
+      %><% if evidence.fields['DataSource'].present? %><%
+        %><% evidence.fields['DataSource'] %><% 
+      %><% else %><%
+        %><% evidence.set_field('DataSource', 'Unknown') %><%
+        %><% evidence.save %><%
+        %><% intM += 1 %><%
+      %><% end %><%
+      %><% if evidence.fields['Show'].present? %><%
+        %><% evidence.fields['Show'] %><%
+      %><% else %><%
+        %><% evidence.set_field('Show', 'No') %><%
+        %><% evidence.save %><%
+        %><% intM += 1 %><%
+      %><% end %><%
+      %><% if evidence.fields['Output'].present? %><%
+        %><% evidence.fields['Output'] %><%
+      %><% else %><%
+        %><% evidence.set_field('Output', 'N/A') %><%
+        %><% evidence.save %><%
+        %><% intM += 1 %><%
+      %><% end %><%
+      %><% if evidence.fields['Port'].present? %><%
+        %><% evidence.fields['Port'] %><%
+      %><% else %><%
+        %><% evidence.set_field('Port', 'N/A') %><%
+        %><% evidence.save %><%
+        %><% intM += 1 %><%
+      %><% end %><%
+    %><% end %><%
+    %><% if intM > 0 %><%
+    %> <p>Updated Evidence fields for "<%= issue.fields['Title'] %>" </p> <%
+    %><% end %><%
+  %><% end %><%
+end %>
+<h1>Updated the Evidence for each Issue to contain DataSource, Show, Output and Port.</h1>
