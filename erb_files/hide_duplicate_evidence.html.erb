@@ -1,5 +1,5 @@
 <!-- 
-# show_first_evidence.html.erb - Sets the first instances of Evidence for each Issue to Show|Yes
+# hide_duplicate_evidence.html.erb - If instances of Evidence are duplicates of each other, set the second instance to Export|No
 #
 # Copyright (C) 2020 Security Roots Ltd.
 #
@@ -25,15 +25,25 @@ USAGE:
 3. Review the output in the new tab and confirm that the script has run as expected!
 --> 
 
-<h1>Updating the first instance of Evidence for each Issue to Show|Yes</h1>
+<h1>Setting duplicate instances of Evidence to Export|No</h1>
 <h2>Please resolve any issues that appear below</h2>
-<% for issue in issues;
-  %><% if issue.affected.empty? %><%
-    %><p><strong>No evidence found for "<%= issue.fields['Title'] %>"</strong></p><%
-  %><% else %><%
-    %><% issue.evidence.first.set_field('Show', 'Yes') %><%
-    %><% issue.evidence.first.save %><%
-    %><p>Updated Evidence for "<%= issue.fields['Title'] %>"</p><%
-  %><% end %><%
-end %>
-<h1>Updated the first instance of Evidence for each Issue to Show|Yes</h1>
+
+<% issues.each do |issue| %>
+	<% if issue.affected.empty? %>
+    <p><strong>No evidence found for "<%= issue.fields['Title'] %>"</strong></p>
+  <% elsif issue.evidence.count == 1 %>
+  	<p><strong>Only 1 instance of Evidence for  "<%= issue.fields['Title'] %>"</strong></p>
+  <% else %>
+  	<% intC = issue.evidence.count - 1 %>
+  	<% while intC > 0 %>
+  		<% if issue.evidence[intC].content == issue.evidence[intC - 1].content %>
+  			<p>Duplicate Evidence for  "<%= issue.fields['Title'] %>" identified</p>
+  			<% issue.evidence[intC - 1].set_field('Export', 'No')%>
+  			<% issue.evidence[intC - 1].save %>
+  		<% end %>
+  		<% intC = intC - 1 %>
+  	<% end %>
+  <% end %>
+<% end %>
+
+<h1>Set any duplicate instances of Evidence to Export|No</h1>
