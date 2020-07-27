@@ -31,3 +31,10 @@ Project.find(pid).custom_field_values.each do |project_property|
 	bi_field_name = Dradis::Pro::BI::CustomField.find(bi_field_id).name
 	puts "#{bi_field_name}: #{project_property.value}"
 end
+
+# To update the fields in all projects or just fields that may or may not be blank:
+Project.all.each do |project|
+  custom_field_value = Dradis::Pro::BI::CustomFieldValue.where(fieldable: project, custom_field_id: Dradis::Pro::BI::CustomField.find_by_name('Project Type')).first_or_initialize
+  custom_field_value.value = 'I have been updated'
+  custom_field_value.save
+end
