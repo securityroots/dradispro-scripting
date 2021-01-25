@@ -19,7 +19,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
-
 USAGE: 
 1. Upload this script to Dradis as an HTML template by navigating to Templates > Reports in the header and uploading this script under the HTML tab
 2. Navigate to your project and click Export results. Select this file from the HTML tab and click Export
@@ -27,12 +26,10 @@ USAGE:
 --> 
 
 <h1>Deleting all Host Nodes that don't have any Evidence associated with them</h1>
-<% Node.set_project_scope(project.id) %>
-<% Evidence.set_project_scope(project.id) %>
 
 <ul>
-<% Node.where(type_id: 1).each do |n| %>
-	<% if Evidence.where(node_id: n.id).count == 0 %>
+<% Node.user_nodes.where(type_id: 1, project_id: project.id).each do |n| %>
+	<% if n.evidence.count == 0 %>
 	  <li><p>No Evidence associated with <%= n.label %>, deleting</p></li>
 	  <% n.destroy %>
 	<% end %>
