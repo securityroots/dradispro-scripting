@@ -25,12 +25,12 @@ if ARGV.size != 1
  exit 1
 end
 
-pid = ARGV[0]
+project = Project.find(ARGV[0])
 
-Node.where(label: "Report content").each do |n|
-	prop_list = n.properties
-	puts "#{prop_list}"
-	prop_list.each_pair do |key, value|
-		puts "#{value}"
-	end
+puts "Listing properties for '#{project.name}' project..."
+
+project.content_library.properties.each_pair do |key, value|
+  puts "\t#{key}: #{value}"
 end
+
+puts "Done."
