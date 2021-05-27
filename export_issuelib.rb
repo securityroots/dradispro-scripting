@@ -1,6 +1,6 @@
 # export_issuelib.rb - Exports all your IssueLibrary entries to a single file.
 #
-# Copyright (C) 2017 Security Roots Ltd.
+# Copyright (C) 2021 Security Roots Ltd.
 #
 # This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
 # The collection can be found at
@@ -29,5 +29,5 @@
 # $ RAILS_ENV=production bundle exec rails runner /opt/dradispro/dradispro/current/issuelib_dump.rb
 
 Dradis::Pro::Issuelib::Entry.find do |libentry|
-	puts %{Dradis::Pro::Issuelib::Entry.create content: "#{libentry.content}"}
+	puts %{Dradis::Pro::Plugins::Issuelib::Entry.create content: "#{libentry.content}"}
 end
