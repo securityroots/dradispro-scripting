@@ -28,6 +28,6 @@
 # Then, you can upload the issuelib_dump.rb file to your instance by running: 
 # $ RAILS_ENV=production bundle exec rails runner /opt/dradispro/dradispro/current/issuelib_dump.rb
 
-Dradis::Pro::Issuelib::Entry.find do |libentry|
+Dradis::Pro::Plugins::Issuelib::Entry.find do |libentry|
 	puts %{Dradis::Pro::Plugins::Issuelib::Entry.create content: "#{libentry.content}"}
 end
