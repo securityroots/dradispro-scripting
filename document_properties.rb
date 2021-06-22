@@ -1,7 +1,7 @@
 # document_properties.rb - Return your Document Properties from the Report Content 
 # page of your Dradis project
 #
-# Copyright (C) 2018 Security Roots Ltd.
+# Copyright (C) 2021 Security Roots Ltd.
 #
 # This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
 # The collection can be found at
@@ -26,11 +26,18 @@ if ARGV.size != 1
 end
 
 project = Project.find(ARGV[0])
-
 puts "Listing properties for '#{project.name}' project..."
 
+new_properties = {}
 project.content_library.properties.each_pair do |key, value|
+  if key == "dradis.client"
+  	value = "Updated!"
+  end
   puts "\t#{key}: #{value}"
+  new_properties[key] = value
 end
+
+project.content_library.properties = new_properties
+project.content_library.save
 
 puts "Done."
