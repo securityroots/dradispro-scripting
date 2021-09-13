@@ -29,5 +29,5 @@
 # $ RAILS_ENV=production bundle exec rails runner /opt/dradispro/dradispro/current/issuelib_dump.rb
 
 Dradis::Pro::Plugins::Issuelib::Entry.find do |libentry|
-	puts %{Dradis::Pro::Plugins::Issuelib::Entry.create content: "#{libentry.content}"}
+	puts %{Dradis::Pro::Plugins::Issuelib::Entry.create content: %q[#{libentry.content}]}
 end
