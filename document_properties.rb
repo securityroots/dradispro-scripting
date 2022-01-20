@@ -1,7 +1,7 @@
 # document_properties.rb - Return your Document Properties from the Report Content 
-# page of your Dradis project
+# page of your Dradis project and update them.
 #
-# Copyright (C) 2021 Security Roots Ltd.
+# Copyright (C) 2022 Security Roots Ltd.
 #
 # This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
 # The collection can be found at
@@ -26,18 +26,18 @@ if ARGV.size != 1
 end
 
 project = Project.find(ARGV[0])
-puts "Listing properties for '#{project.name}' project..."
 
-new_properties = {}
-project.content_library.properties.each_pair do |key, value|
-  if key == "dradis.client"
-  	value = "Updated!"
-  end
-  puts "\t#{key}: #{value}"
-  new_properties[key] = value
-end
 
-project.content_library.properties = new_properties
+# When using 'set_property' if the property exists we append the new
+# value to it and the property becomes an Array. This is not the desired
+# result here, so we delete/clear the property first.
+project.content_library.properties.delete("dradis.client")
+project.content_library.set_property("dradis.client", 'Updated!')
 project.content_library.save
+puts "Updated the value for dradis.client"
 
+puts "Listing properties for '#{project.name}' project..."
+project.content_library.properties.each_pair do |key, value|
+  puts "\t#{key}: #{value}"
+end
 puts "Done."
