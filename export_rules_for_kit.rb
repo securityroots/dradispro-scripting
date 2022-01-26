@@ -1,8 +1,9 @@
-
 # export_rules_for_kit.rb - Export the rules in a format that can be included in a Kit or
 #   executed to build the ruleset
-#
-# Copyright (C) 2017 Security Roots Ltd.
+# for more on kits and configuring the Rules Engine: https://dradisframework.com/support/guides/administration/kits.html#seed
+# 
+# Copyright (C) 2022 Security Roots Ltd.
+# Thanks to @mgargiullo for this script! 
 #
 # This file is part of the Dradis Pro Scripting Examples (DPSE) collection.
 # The collection can be found at
