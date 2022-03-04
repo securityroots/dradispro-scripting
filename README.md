@@ -30,19 +30,29 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 
 * `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project
 * `/bash_files/bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
+* `create_issue_node_evidence.rb` - Create an Issue, create a Node, and then create an instance of Evidence associated with both
+* `create_project_apply_projecttemplate.rb` - Create a new Project and apply a Project Template, then return the Project ID.
 * `create_project.rb` - Create a project with a name passed as argument and return the assigned ID
 * `daily_summary.rb` - Finds and outputs all of the Issues added to Dradis in the past 24 hours
 * `delete_nodes_without_evidence.rb` - Deletes Host Nodes that don't have any Evidence associated with them in a specific project
+* `document_properties.rb` - Return your Document Properties from the Report Content
+* `/erb_files/issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
 * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
 * `export_rt.rb` - Exports all your Remediation Tracker tickets to a single file
+* `export_rules_for_kit.rb` - Export the rules in a format that can be included in a Kit or executed to build the ruleset
 * `find_xss.rb` - Find recent projects with XSS Issues in them
-* `issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
-* `load_project_from_api` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance
+* `load_project_from_api.rb` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance
 * `project_association_check.rb` - Checks to make sure all projects are associated with a report template
+* `project_methodologies.rb` - Accesses each methodology for a project, then each list, and each card in that list. 
 * `project_stats.rb` - Find which issues have been found across multiple projects and other project stats
 * `recover_trash.rb` - Restores all the items from the Trash feature in a single project
+* `send_to_rt.rb` - Sends all Issues in a given project to the Remediation Tracker as Tickets
+* `update_attachment_paths_to_v3.rb` - Updates attachment paths so they match the >= 3.0 format (after one project per tab was introduced)
+* `update_attachments_after_node_merge.rb` - Find instances of attachments after merging nodes
 * `update_content_blocks.rb` - Return and edit Content Blocks associated with a specific project
 * `update_issuelib_entries.rb` - Find/replace and add fields to your IssueLibrary entries
+* `usage_audit.rb` - Check to see a summary of usage per user over the last month
+* `year_in_review.rb` - Yearly stats for your Dradis instance
 
 # What does each script do?
 

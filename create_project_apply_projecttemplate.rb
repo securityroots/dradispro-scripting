@@ -1,4 +1,4 @@
-# create_project.rb - Create a new Project and apply a Project Template, then return the Project ID.
+# create_project_apply_projecttemplate.rb - Create a new Project and apply a Project Template, then return the Project ID.
 #
 # Copyright (C) 2021 Security Roots Ltd.
 #
