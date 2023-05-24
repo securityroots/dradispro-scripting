@@ -25,15 +25,12 @@ if ARGV.size != 1
   exit 1
 end
 
-
 the_controller = ApplicationController.new
 the_controller.class.send(:include, Rails.application.routes.url_helpers)
 
 project = Project.find(ARGV[0])
 issues = project.issues
 tags = project.tags
-
-
 
 the_controller.instance_variable_set "@all_columns", []
 the_controller.instance_variable_set "@default_columns", []
