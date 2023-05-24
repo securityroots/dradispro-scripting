@@ -37,8 +37,8 @@ tags = project.tags
 
 the_controller.instance_variable_set "@all_columns", []
 the_controller.instance_variable_set "@default_columns", []
-the_controller.instance_variable_set "@issues", @issues
-the_controller.instance_variable_set "@tags", @tags
+the_controller.instance_variable_set "@issues", issues
+the_controller.instance_variable_set "@tags", tags
 the_controller.request = ActionDispatch::TestRequest.create
 
 view_renderer = ActionView::Renderer.new the_controller.lookup_context
