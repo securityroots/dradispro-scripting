@@ -29,9 +29,10 @@ end
 the_controller = ApplicationController.new
 the_controller.class.send(:include, Rails.application.routes.url_helpers)
 
-@issues = Issue.all
-@tags = Tag.all
-@project = Project.find(ARGV[0])
+project = Project.find(ARGV[0])
+issues = project.issues
+tags = project.tags
+
 
 current_project = Project.find(ARGV[0])
 
