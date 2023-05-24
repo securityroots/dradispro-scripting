@@ -42,4 +42,4 @@ the_controller.instance_variable_set "@tags", tags
 the_controller.request = ActionDispatch::TestRequest.create
 
 view_renderer = ActionView::Renderer.new the_controller.lookup_context
-view_renderer.render the_controller.view_context, { partial: 'issues/table', layout: false, locals: { current_project: @project, issues: @issues, local_storage_key: "project.pro.#{$0}.issues_datatable", tags: @tags } }
+view_renderer.render the_controller.view_context, { partial: 'issues/table', layout: false, locals: { current_project: project, issues: issues, local_storage_key: "project.pro.#{project.id}.issues_datatable", tags: tags } }
