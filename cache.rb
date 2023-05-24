@@ -34,7 +34,6 @@ issues = project.issues
 tags = project.tags
 
 
-current_project = Project.find(ARGV[0])
 
 the_controller.instance_variable_set "@all_columns", []
 the_controller.instance_variable_set "@default_columns", []
