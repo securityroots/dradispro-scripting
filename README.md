@@ -36,6 +36,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `daily_summary.rb` - Finds and outputs all of the Issues added to Dradis in the past 24 hours
 * `delete_nodes_without_evidence.rb` - Deletes Host Nodes that don't have any Evidence associated with them in a specific project
 * `document_properties.rb` - Return your Document Properties from the Report Content
+* `empty_trash.rb` - Deletes all projects from the instance-level trash
 * `/erb_files/issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
 * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
 * `export_rt.rb` - Exports all your Remediation Tracker tickets to a single file
