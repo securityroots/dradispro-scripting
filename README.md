@@ -48,6 +48,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `project_stats.rb` - Find which issues have been found across multiple projects and other project stats
 * `recover_trash.rb` - Restores all the items from the Trash feature in a single project
 * `send_to_rt.rb` - Sends all Issues in a given project to the Remediation Tracker as Tickets
+* `top10.rb` - Creates tables of top 10 ports/protocols, services, and OSs in a content block
 * `update_attachment_paths_to_v3.rb` - Updates attachment paths so they match the >= 3.0 format (after one project per tab was introduced)
 * `update_attachments_after_node_merge.rb` - Find instances of attachments after merging nodes
 * `update_content_blocks.rb` - Return and edit Content Blocks associated with a specific project
