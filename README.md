@@ -39,6 +39,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `empty_trash.rb` - Deletes all projects from the instance-level trash
 * `/erb_files/issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
 * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
+* `export_mappings_for_kit.rb` - Export the Mappings in a format that can be included in a kit
 * `export_rt.rb` - Exports all your Remediation Tracker tickets to a single file
 * `export_rules_for_kit.rb` - Export the rules in a format that can be included in a Kit or executed to build the ruleset
 * `find_xss.rb` - Find recent projects with XSS Issues in them
