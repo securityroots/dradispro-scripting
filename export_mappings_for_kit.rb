@@ -22,8 +22,10 @@
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
 if ARGV.size != 1
- puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename>"
- exit 1
+  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename>"
+  puts "To export to another rb file, run the following"
+  puts "RAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename> >> mappings_seed.rb"
+  exit 1
 end
 
 report_template = ARGV[0]
@@ -46,9 +48,12 @@ Mapping.where(destination: id).each do |mapping|
     puts "  mapping_id: #{mapping.id},"
     puts "  source_field: '#{field.source_field}',"
     puts "  destination_field: '#{field.destination_field}',"
-    puts "  content: '#{field.content}'"
+    puts "  content: \"#{field.content}\""
     puts ")"
     puts "\n"
   end
+  mapping_count += 1
+end
+
   mapping_count += 1
 end
