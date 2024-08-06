@@ -29,66 +29,73 @@ end
 
 report_template = ARGV[0]
 rtp = ReportTemplateProperties.find_by(title: report_template)
-# Outputs the report template properties in the format used by the kit's rb file
-puts "ReportTemplateProperties.create_from_hash!("
-puts "  definition_file: File.basename(#{report_template}, '.rb'),"
-puts "  # plugin_name: 'excel',"
-puts "  plugin_name: 'word',"
-puts "  # plugin_name: 'html_export',"
-puts "  content_block_fields: {"
-rtp.content_blocks.each do |block|
-  puts "    '#{block[0]}' => ["
-  block.drop(1).each do |field_list|
-    field_list.each do |field|
-      if field.values.nil?
-        puts "      {name: '#{field.name}', type: '#{field.type}', values: nil},"
-      else
-        puts "      {name: '#{field.name}', type: '#{field.type}', values: #{field.values.join}},"
+if rtp.nil?
+  puts "#{report_template} not found, please check the report template's name and try again"
+else
+  # Outputs the report template properties in the format used by the kit's rb file
+  puts "ReportTemplateProperties.create_from_hash!("
+  puts "  definition_file: File.basename(#{report_template}, '.rb'),"
+  puts "  # plugin_name: 'excel',"
+  puts "  plugin_name: 'word',"
+  puts "  # plugin_name: 'html_export',"
+  puts "  content_block_fields: {"
+  rtp.content_blocks.each do |block|
+    puts "    '#{block[0]}' => ["
+    block.drop(1).each do |field_list|
+      field_list.each do |field|
+        if field.values.nil?
+          puts "      {name: '#{field.name}', type: '#{field.type}', values: nil},"
+        else
+          puts "      {name: '#{field.name}', type: '#{field.type}', values: \"#{field.values.join('\n')}\"},"
+        end
       end
-      
+    end
+    puts "    ],"
+  end
+  puts "  },"
+  puts "  document_properties: #{rtp.document_properties},"
+  puts "  evidence_fields: ["
+  rtp.evidence_fields.each do |evidence_field|
+    if evidence_field.values.nil?
+      puts "    {name: '#{evidence_field.name}', type: '#{evidence_field.type}', values: nil},"
+    else
+      puts "    {name: '#{evidence_field.name}', type: '#{evidence_field.type}', values: \"#{evidence_field.values.join('\n')}\"},"
     end
   end
-  puts "    ],"
-end
-puts "  },"
-puts "  document_properties: #{rtp.document_properties},"
-puts "  evidence_fields: ["
-rtp.evidence_fields.each do |evidence_field|
-  if evidence_field.values == nil
-    puts "nil"
+  puts "  ],"
+  puts "  issue_fields: ["
+  rtp.issue_fields.each do |issue_field|
+    if issue_field.values.nil?
+      puts "    {name: '#{issue_field.name}', type: '#{issue_field.type}', values: nil},"
+    else
+      puts "    {name: '#{issue_field.name}', type: '#{issue_field.type}', values: \"#{issue_field.values.join('\n')}\"},"
+    end
   end
-  puts "    {name: '#{evidence_field.name}', type: '#{evidence_field.type}', values: #{evidence_field.values.nil? ? 'nil' : evidence_field.values.join}},"
-end
-puts "  ],"
-puts "  issue_fields: ["
-rtp.issue_fields.each do |issue_field|
-  puts "    {name: '#{issue_field.name}', type: '#{issue_field.type}', values: #{issue_field.values.nil? ? 'nil' : issue_field.values.join}},"
-end
+  puts "  ]"
+  puts ")"
+  puts "\n\n\n\n"
 
-puts "  ]"
-puts ")"
-puts "################# Need values to a list, not an array"
-puts "\n\n\n\n"
-
-# Outputs the mappings in the format used by mappings_seed.rb
-id = "rtp_#{rtp.id}"
-puts "rtp = ReportTemplateProperties.find_by(title: '#{report_template}')"
-mapping_count = 1
-Mapping.where(destination: id).each do |mapping|
-  #puts "mapping#{mapping_count} = Mapping.create("
-  #puts "  component: '#{mapping.component}',"
-  #puts "  source: '#{mapping.source}',"
-  #puts "  destination: '#{mapping.destination}'"
-  #puts ")"
-  #puts "\n"
-  MappingField.where(mapping_id: mapping.id).each do |field|
-    #puts "MappingField.create("
-    #puts "  mapping_id: #{mapping.id},"
-    #puts "  source_field: '#{field.source_field}',"
-    #puts "  destination_field: '#{field.destination_field}',"
-    #puts "  content: \"#{field.content}\""
-    #puts ")"
-    #puts "\n"
+  # Outputs the mappings in the format used by mappings_seed.rb
+  id = "rtp_#{rtp.id}"
+  puts "rtp = ReportTemplateProperties.find_by(title: '#{report_template}')"
+  mapping_count = 1
+  Mapping.where(destination: id).each do |mapping|
+    puts "mapping#{mapping_count} = Mapping.create("
+    puts "  component: '#{mapping.component}',"
+    puts "  source: '#{mapping.source}',"
+    puts "  destination: '#{mapping.destination}'"
+    puts ")"
+    puts "\n"
+    MappingField.where(mapping_id: mapping.id).each do |field|
+      puts "MappingField.create("
+      puts "  mapping_id: #{mapping.id},"
+      puts "  source_field: '#{field.source_field}',"
+      puts "  destination_field: '#{field.destination_field}',"
+      puts "  content: \"#{field.content}\""
+      puts ")"
+      puts "\n"
+    end
+    mapping_count += 1
   end
-  mapping_count += 1
+  
 end
