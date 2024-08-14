@@ -88,7 +88,7 @@ else
     puts "\n"
     MappingField.where(mapping_id: mapping.id).each do |field|
       puts "MappingField.create("
-      puts "  mapping_id: #{mapping.id},"
+      puts "  mapping_id: mapping#{mapping_count}.id,"
       puts "  source_field: '#{field.source_field}',"
       puts "  destination_field: '#{field.destination_field}',"
       puts "  content: \"#{field.content}\""
