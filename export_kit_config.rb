@@ -21,16 +21,16 @@
 # along with DPSE.  If not, see <http://www.gnu.org/licenses/>.
 
 if ARGV.size != 1
-  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename>"
+  puts "Usage:\n\tRAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename.docm>"
   puts "To export to another rb file, run the following"
-  puts "RAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename> >> config.rb"
+  puts "RAILS_ENV=#{Rails.env} bundle exec rails runner #{$0} <report_template_filename.docm> >> config.rb"
   exit 1
 end
 
 report_template = ARGV[0]
-rtp = ReportTemplateProperties.find_by(title: report_template)
+rtp = ReportTemplateProperties.find_by(template_file: report_template)
 if rtp.nil?
-  puts "#{report_template} not found, please check the report template's name and try again"
+  puts "#{report_template} not found, please check the report template's name and extension, then try again"
 else
   # Outputs the report template properties in the format used by the kit's rb file
   puts "ReportTemplateProperties.create_from_hash!("
