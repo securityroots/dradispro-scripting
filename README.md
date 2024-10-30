@@ -28,17 +28,32 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 
 # List of scripts
 
+* `add_issuelib_entries_to_project.rb` - Add all IssueLibrary entries to a specific project as Issues
+* `bash_files`
+** `/bulk_upload.sh/` - Upload multiple tool output files to a project at once, one plugin at a time
 * `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project
-* `/bash_files/bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
+* `cache.rb` - Cache the list of issues for a project; useful for projects with large numbers of issues
+* `clear_trash_6_months.rb` - Deletes items >6 months old discarded in trash
+* `copy_mappings.rb` - Copy all mappings from one report template to another
 * `create_issue_node_evidence.rb` - Create an Issue, create a Node, and then create an instance of Evidence associated with both
 * `create_project_apply_projecttemplate.rb` - Create a new Project and apply a Project Template, then return the Project ID.
 * `create_project.rb` - Create a project with a name passed as argument and return the assigned ID
 * `daily_summary.rb` - Finds and outputs all of the Issues added to Dradis in the past 24 hours
 * `delete_nodes_without_evidence.rb` - Deletes Host Nodes that don't have any Evidence associated with them in a specific project
 * `document_properties.rb` - Return your Document Properties from the Report Content
+* `double_asterisks.rb` - Replaces double asterisks (`**`) from Issues, Evidence, and Content Blocks without removing nested lists
 * `empty_trash.rb` - Deletes all projects from the instance-level trash
-* `/erb_files/issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
+* `/erb_files/`
+** `delete_nodes_without_evidence.html.erb` - Delete Host Nodes that don't have any Evidence associated with them in a specific project
+** `hide_duplicate_evidence.html.erb` - Set duplicate instances of Evidence to Export|No
+** `issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
+** `issue_risk_from_evidence_severity.html.erb` - Set the Issue's `Risk` field value and tag based on the highest `Severity` field value from the associated Evidence
+** `show_first_evidence.html.erb` - Set the first instances of Evidence for each Issue to Show|Yes
+** `tag_issues.html.erb` - Tag Issues based on CVSSv3.BaseScore field
+** `update_evidence.html.erb` - Update each instance of Evidence to contain DataSource, Show, Output and Port
+* `export_all_mappings.rb` - Export the Mapping and MappingFields from all report template the kit format
 * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
+* `export_kit_config.rb` - Export the mappings and RTPs for kit format
 * `export_mappings_for_kit.rb` - Export the Mappings in a format that can be included in a kit
 * `export_rt.rb` - Exports all your Remediation Tracker tickets to a single file
 * `export_rules_for_kit.rb` - Export the rules in a format that can be included in a Kit or executed to build the ruleset
