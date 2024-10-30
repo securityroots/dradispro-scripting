@@ -31,7 +31,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `add_issuelib_entries_to_project.rb` - Add all IssueLibrary entries to a specific project as Issues
 * `bash_files`
     * `/bulk_upload.sh/` - Upload multiple tool output files to a project at once, one plugin at a time
-* `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project
+* `bi_fields.rb` - Return or update the Custom Project Properties from the BI Dashboard for a specific project
 * `cache.rb` - Cache the list of issues for a project; useful for projects with large numbers of issues
 * `clear_trash_6_months.rb` - Deletes items >6 months old discarded in trash
 * `copy_mappings.rb` - Copy all mappings from one report template to another
