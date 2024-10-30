@@ -30,7 +30,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 
 * `add_issuelib_entries_to_project.rb` - Add all IssueLibrary entries to a specific project as Issues
 * `bash_files`
-** `/bulk_upload.sh/` - Upload multiple tool output files to a project at once, one plugin at a time
+    * `/bulk_upload.sh/` - Upload multiple tool output files to a project at once, one plugin at a time
 * `bi_fields.rb` - Return the Custom Project Properties from the BI Dashboard for a specific project
 * `cache.rb` - Cache the list of issues for a project; useful for projects with large numbers of issues
 * `clear_trash_6_months.rb` - Deletes items >6 months old discarded in trash
@@ -44,13 +44,13 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `double_asterisks.rb` - Replaces double asterisks (`**`) from Issues, Evidence, and Content Blocks without removing nested lists
 * `empty_trash.rb` - Deletes all projects from the instance-level trash
 * `/erb_files/`
-** `delete_nodes_without_evidence.html.erb` - Delete Host Nodes that don't have any Evidence associated with them in a specific project
-** `hide_duplicate_evidence.html.erb` - Set duplicate instances of Evidence to Export|No
-** `issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
-** `issue_risk_from_evidence_severity.html.erb` - Set the Issue's `Risk` field value and tag based on the highest `Severity` field value from the associated Evidence
-** `show_first_evidence.html.erb` - Set the first instances of Evidence for each Issue to Show|Yes
-** `tag_issues.html.erb` - Tag Issues based on CVSSv3.BaseScore field
-** `update_evidence.html.erb` - Update each instance of Evidence to contain DataSource, Show, Output and Port
+    * `delete_nodes_without_evidence.html.erb` - Delete Host Nodes that don't have any Evidence associated with them in a specific project
+    * `hide_duplicate_evidence.html.erb` - Set duplicate instances of Evidence to Export|No
+    * `issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
+    * `issue_risk_from_evidence_severity.html.erb` - Set the Issue's `Risk` field value and tag based on the highest `Severity` field value from the associated Evidence
+    * `show_first_evidence.html.erb` - Set the first instances of Evidence for each Issue to Show|Yes
+    * `tag_issues.html.erb` - Tag Issues based on CVSSv3.BaseScore field
+    * `update_evidence.html.erb` - Update each instance of Evidence to contain DataSource, Show, Output and Port
 * `export_all_mappings.rb` - Export the Mapping and MappingFields from all report template the kit format
 * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
 * `export_kit_config.rb` - Export the mappings and RTPs for kit format
