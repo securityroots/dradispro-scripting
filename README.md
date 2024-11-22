@@ -34,6 +34,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
     * `find_xss.rb` - Find recent projects with XSS Issues in them
     * `project_association_check.rb` - Checks to make sure all projects are associated with a report template
     * `project_stats.rb` - Find which issues have been found across multiple projects and other project stats
+    * `single_project_activity.rb` - Returns all activity (Issues, Evidence, Nodes, Notes, ContentBlocks, Methodology Boards, Methodology Lists, Methodology Cards, Comments, and Tags) for 1 project
     * `top10.rb` - Creates tables of top 10 ports/protocols, services, and OSs in a content block
     * `update_attachment_paths_to_v3.rb` - Updates attachment paths so they match the >= 3.0 format (after one project per tab was introduced)
     * `usage_audit.rb` - Check to see a summary of usage per user over the last month
