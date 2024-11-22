@@ -40,7 +40,8 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
     * `usage_audit.rb` - Check to see a summary of usage per user over the last month
     * `year_in_review.rb` - Yearly stats for your Dradis instance
 * `bash_files`
-    * `/bulk_upload.sh/` - Upload multiple tool output files to a project at once, one plugin at a time
+    * `bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
+    * `migrate_data.sh` - Migrate data from one Dradis instance to another
 * `/erb_files/`
     * `delete_nodes_without_evidence.html.erb` - Delete Host Nodes that don't have any Evidence associated with them in a specific project
     * `hide_duplicate_evidence.html.erb` - Set duplicate instances of Evidence to Export|No
