@@ -1,4 +1,4 @@
-# single_project_activity.v2.rb - Returns all activity for 1 project
+# single_project_activity.rb - Returns all activity for 1 project
 # Activities covered: Issues, Evidence, Nodes, Notes, ContentBlocks,
 # Methodology Boards, Methodology Lists, Methodology Cards, Comments, and Tags
 # 
