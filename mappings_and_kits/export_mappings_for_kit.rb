@@ -54,6 +54,3 @@ Mapping.where(destination: id).each do |mapping|
   end
   mapping_count += 1
 end
-
-  mapping_count += 1
-end
