@@ -7,7 +7,6 @@ pid = ARGV[0]
 project = Project.find(pid)
 
 project.issues.each do |issue|
-  issue.content << "\r\n\r\n#[Status]#\r\nOpen\r\n"
-  puts "Adding #[Status]# field to issue #{issue.id}"
+  issue.set_field('Status', 'Open')
   issue.save
 end
