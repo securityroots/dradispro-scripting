@@ -73,6 +73,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
     * `project_methodologies.rb` - Accesses each methodology for a project, then each list, and each card in that list. 
     * `update_attachments_after_node_merge.rb` - Find instances of attachments after merging nodes
     * `update_content_blocks.rb` - Return and edit Content Blocks associated with a specific project
+    * `update_issues.rb` - Add a new field to all issues in a specific project
 * `remediation_tracker`
     * `export_rt.rb` - Exports all your Remediation Tracker tickets to a single file
     * `send_to_rt.rb` - Sends all Issues in a given project to the Remediation Tracker as Tickets
