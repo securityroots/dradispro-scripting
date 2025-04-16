@@ -48,7 +48,7 @@ read MediumIcon
 echo "What is your icon (small) file and location?"
 read SmallIcon
 
-echo "What is your favicon (read/no notifications) file and location?"
+echo "What is your favicon (no notifications) file and location?"
 read FaviconRead
 
 echo "What is your favicon (unread/notifications present) file and location?"
