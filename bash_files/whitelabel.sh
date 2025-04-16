@@ -2,6 +2,7 @@
 
 # whitelabel.sh - lets you update logos and icons on your Dradis Pro instance to
 # white-label it with your company identity; particularly handy for the Gateway
+#
 # To use: Run this from a machine with SSH access to your Dradis instance. You
 # will then transfer logo files and icons, and replace the company name and website.
 #
