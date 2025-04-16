@@ -28,10 +28,10 @@
 echo "This script will help you white-label Dradis with your company identity. As changes made with this script will not survive upgrades, you will need to re-run it after every Dradis upgrade."
 echo
 echo "Ensure you have SSH access to your Dradis instance from this machine."
-echo "You will want to get your icon and favicon ready. You need a large and small icon, and a favicon showing a read and unread notification state."
+echo "You will want to get your icon and favicon ready. You need a large, medium, and small icon, and a favicon showing a read and unread notification state."
 echo
 echo "Path names requested in this script should be relative. In other words, if your icon.png is in this folder, use: icon.png"
-echo "Or if it's in a subfolder, use e.g.: dradis/icon.png"
+echo "Or if it's in a subfolder, use e.g.: dradis/icon.png. Give the filename and extension as well when asked for the images."
 echo
 echo "What is your SSH/SCP destination? Example: if your Dradis instance is hosted at 192.169.0.1, enter: 192.169.0.1"
 read SSHDradis
@@ -39,19 +39,19 @@ echo "Note that if you access SSH with a password instead of a key, you will be 
 echo
 
 # Get icon locations
-echo "What is your icon (large) file and location?"
+echo "Where is your icon (large) file located? This file will be used as the logo on the login page."
 read LargeIcon
 
-echo "What is your icon (medium) file and location?"
+echo "Where is your icon (medium) file located? This is used as the logo in the top left of the main Dradis interface."
 read MediumIcon
 
-echo "What is your icon (small) file and location?"
+echo "Where is your icon (small) file located? This is the small logo used inside Dradis projects."
 read SmallIcon
 
-echo "What is your favicon (no notifications) file and location?"
+echo "Where is your favicon (no notifications) file located?"
 read FaviconRead
 
-echo "What is your favicon (unread/notifications present) file and location?"
+echo "Where is your favicon (unread/notifications present) file located?"
 read FaviconUnread
 
 scp ./$SmallIcon dradispro@$SSHDradis:/opt/dradispro/dradispro/current/app/assets/images/logo_small.png
@@ -70,17 +70,17 @@ DradisURI=dradis.com
 
 
 # V4.15 of Dradis or older (Tylium and Mintcreek views)
-ssh dradispro@$SSHDradis "sed -i \"s/Dradis Professional Edition/$LabelID/g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
-ssh dradispro@$SSHDradis "sed -i \"s/$DradisURI/$SiteURI/g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
-ssh dradispro@$SSHDradis "sed -i \"s/Dradis Professional Edition/$LabelID/g\" /opt/dradispro/dradispro/current/app/views/layouts/tylium.html.erb"
-ssh dradispro@$SSHDradis "sed -i \"s/Dradis Professional Edition/$LabelID/g\" /opt/dradispro/dradispro/current/app/views/layouts/mintcreek.html.erb"
-ssh dradispro@$SSHDradis "sed -i \"s/$DradisURI/$SiteURI/g\" /opt/dradispro/dradispro/current/app/views/layouts/mintcreek.html.erb"
+ssh dradispro@$SSHDradis "sed -i \"s~Dradis Professional Edition~$LabelID~g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
+ssh dradispro@$SSHDradis "sed -i \"s~$DradisURI~$SiteURI~g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
+ssh dradispro@$SSHDradis "sed -i \"s~Dradis Professional Edition~$LabelID~g\" /opt/dradispro/dradispro/current/app/views/layouts/tylium.html.erb"
+ssh dradispro@$SSHDradis "sed -i \"s~Dradis Professional Edition~$LabelID~g\" /opt/dradispro/dradispro/current/app/views/layouts/mintcreek.html.erb"
+ssh dradispro@$SSHDradis "sed -i \"s~$DradisURI~$SiteURI~g\" /opt/dradispro/dradispro/current/app/views/layouts/mintcreek.html.erb"
 
 # V4.16 of Dradis or newer (Hera view) UNTESTED!
-# ssh dradispro@$SSHDradis "sed -i \"s/Dradis Professional Edition/$LabelID/g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
-# ssh dradispro@$SSHDradis "sed -i \"s/$DradisURI/$SiteURI/g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
-# ssh dradispro@$SSHDradis "sed -i \"s/Dradis Professional Edition/$LabelID/g\" /opt/dradispro/dradispro/current/app/helpers/hera_helper.rb"
-# ssh dradispro@$SSHDradis "sed -i \"s/Dradis Professional Edition/$LabelID/g\" /opt/dradispro/dradispro/current/app/views/layouts/hera/footer/_pro.html.erb"
+# ssh dradispro@$SSHDradis "sed -i \"s~Dradis Professional Edition~$LabelID~g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
+# ssh dradispro@$SSHDradis "sed -i \"s~$DradisURI~$SiteURI~g\" /opt/dradispro/dradispro/current/app/views/layouts/application.html.erb"
+# ssh dradispro@$SSHDradis "sed -i \"s~Dradis Professional Edition~$LabelID~g\" /opt/dradispro/dradispro/current/app/helpers/hera_helper.rb"
+# ssh dradispro@$SSHDradis "sed -i \"s~Dradis Professional Edition~$LabelID~g\" /opt/dradispro/dradispro/current/app/views/layouts/hera/footer/_pro.html.erb"
 
 # Precompile and restart
 ssh dradispro@$SSHDradis << EOF
