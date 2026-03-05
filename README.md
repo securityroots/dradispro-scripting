@@ -38,10 +38,15 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
     * `top10.rb` - Creates tables of top 10 ports/protocols, services, and OSs in a content block
     * `update_attachment_paths_to_v3.rb` - Updates attachment paths so they match the >= 3.0 format (after one project per tab was introduced)
     * `usage_audit.rb` - Check to see a summary of usage per user over the last month
-    * `year_in_review.rb` - Yearly stats for your Dradis instance
 * `bash_files`
     * `bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
     * `migrate_data.sh` - Migrate data from one Dradis instance to another
+* `/business_intelligence/`
+    * `extract_projects_bi_data.rb` - Extracts projects' Business Intelligence data
+    * `extract_teams_bi_data.rb` - Extracts teams' Business Intelligence data
+    * `update_projects_bi_data.rb` - Updates projects' Business Intelligence data
+    * `update_teams_bi_data.rb` - Updates teams' Business Intelligence data
+    * `year_in_review.rb` - Yearly stats for your Dradis instance
 * `/erb_files/`
     * `delete_nodes_without_evidence.html.erb` - Delete Host Nodes that don't have any Evidence associated with them in a specific project
     * `hide_duplicate_evidence.html.erb` - Set duplicate instances of Evidence to Export|No
