@@ -41,13 +41,13 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `bash_files`
     * `bulk_upload.sh` - Upload multiple tool output files to a project at once, one plugin at a time
     * `migrate_data.sh` - Migrate data from one Dradis instance to another
-* `/business_intelligence/`
+* `business_intelligence`
     * `extract_projects_bi_data.rb` - Extracts projects' Business Intelligence data
     * `extract_teams_bi_data.rb` - Extracts teams' Business Intelligence data
     * `update_projects_bi_data.rb` - Updates projects' Business Intelligence data
     * `update_teams_bi_data.rb` - Updates teams' Business Intelligence data
     * `year_in_review.rb` - Yearly stats for your Dradis instance
-* `/erb_files/`
+* `erb_files`
     * `delete_nodes_without_evidence.html.erb` - Delete Host Nodes that don't have any Evidence associated with them in a specific project
     * `hide_duplicate_evidence.html.erb` - Set duplicate instances of Evidence to Export|No
     * `issue_id.html.erb` - Adds the unique issue identifier from your Dradis instance to each issue in a project in a new ID field
