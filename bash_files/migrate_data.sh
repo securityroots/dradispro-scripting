@@ -85,11 +85,11 @@ rm $filename
 
 echo Gateway themes migration step completed.
 
-# Export storage; not yet implemented
-# echo Migrating storage...
-# ssh dradispro@$old_ip -- 'dp-export-storage' > dradis-storage.tar
-# cat dradis-storage.tar | ssh dradispro@$new_ip -- 'dp-import-storage'
-# echo Storage migration completed.
+# Export storage
+echo Migrating storage...
+ssh dradispro@$old_ip -- 'dp-export-storage' > dradis-storage.tar
+cat dradis-storage.tar | ssh dradispro@$new_ip -- 'dp-import-storage'
+echo Storage migration completed.
 
 # Migrate, and restart processes
 echo Restarting worker processes on your new Dradis instance...
