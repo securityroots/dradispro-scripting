@@ -86,6 +86,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
 * `trash`
     * `clear_trash_6_months.rb` - Deletes items >6 months old discarded in trash
     * `empty_trash.rb` - Deletes all projects from the instance-level trash
+    * `inactive_projects.rb` - Archives projects inactive for 30+ days. Trashes projects archived for 30+ days. 
     * `recover_trash.rb` - Restores all the items from the Trash feature in a single project
 
 
