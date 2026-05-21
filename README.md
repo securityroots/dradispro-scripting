@@ -67,6 +67,9 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
     * `export_mappings_for_kit.rb` - Export the Mappings in a format that can be included in a kit
     * `export_rules_for_kit.rb` - Export the rules in a format that can be included in a Kit or executed to build the ruleset
 * `project_create`
+    * `bulk_export_projects.rb` - Exports project packages of multiple or all projects that are not in trash, on VM deployments
+    * `bulk_export_projects_docker.sh` - Exports project packages of multiple or all projects that are not in trash, on Docker deployments
+    * `bulk_import_projects.rb - Imports multiple project packages to new projects on a Dradis instance, designed to work with either of the `bulk_export*` scripts
     * `create_project_apply_projecttemplate.rb` - Create a new Project and apply a Project Template, then return the Project ID.
     * `create_project.rb` - Create a project with a name passed as argument and return the assigned ID
     * `load_project_from_api.rb` - Query a remote JSON API response to get project data and create matching Projects in the Dradis appliance
