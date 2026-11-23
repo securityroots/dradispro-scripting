@@ -59,6 +59,7 @@ $ RAILS_ENV=production bundle exec rails runner find_xss.rb
     * `add_issuelib_entries_to_project.rb` - Add all IssueLibrary entries to a specific project as Issues
     * `export_issuelib.rb` - Exports all your IssueLibrary entries to a single file
     * `issuelib_usage_report.rb` - Lists projects associated with each used IssueLibrary entry
+    * `move_shared_content_to_default_translation.rb` - Move your IssueLibrary entries' shared content into their default Locale's Translation (v5.5 or later)
     * `update_issuelib_entries.rb` - Find/replace and add fields to your IssueLibrary entries
 * `mappings_and_kits`
     * `copy_mappings.rb` - Copy all mappings from one report template to another
